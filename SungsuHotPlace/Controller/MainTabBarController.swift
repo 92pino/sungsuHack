@@ -11,6 +11,7 @@ import UIKit
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     let homeVC = MainViewController()
+    let favoriteVC = FavoriteViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +19,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         // 탭바 위에 뷰컨트롤러 올리기
         
-        homeVC.tabBarItem = UITabBarItem(title: nil, image: #imageLiteral(resourceName: "close_ic"), selectedImage: #imageLiteral(resourceName: "close_ic"))
+        homeVC.tabBarItem = UITabBarItem(title: nil, image: #imageLiteral(resourceName: "home"), selectedImage: #imageLiteral(resourceName: "home_active"))
+        favoriteVC.tabBarItem = UITabBarItem(title: nil, image: #imageLiteral(resourceName: "favorite"), selectedImage: #imageLiteral(resourceName: "favorite_active"))
         
         // homeVC에 네비게이션 적용시키기
-        viewControllers = [UINavigationController.init(rootViewController: homeVC)]
+        viewControllers = [UINavigationController.init(rootViewController: homeVC), UINavigationController.init(rootViewController: favoriteVC)]
         
         self.delegate = self
         
