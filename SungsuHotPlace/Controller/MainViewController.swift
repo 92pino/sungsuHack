@@ -13,8 +13,10 @@ private struct Standard {
 }
 class MainViewController: UIViewController {
     
-    var cafeList = bountyInfoList
-    let searchController = UISearchController(searchResultsController: nil)
+    let favoriteVC = FavoriteViewController()
+    var cafeInfoList = CafeList()
+    let cafeManager = CafeManager.shared
+
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: FlexibleLayout())
     
     private var imageArray: [UIImage] = []
@@ -22,7 +24,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "로고영역"
         
         searchMethod()
         makeImage()
@@ -31,29 +32,41 @@ class MainViewController: UIViewController {
     }
     
     func searchMethod() {
-        // Setup Basic SearchController Setting
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        navigationItem.searchController = searchController
-        
-        // Setup other SearchController Setting
-        
-        searchController.searchBar.placeholder = "Search Cafe"
-        
-        // 검색 할 때 배경을 어둡게 할지 밝게할지
-        searchController.obscuresBackgroundDuringPresentation = false
-    }
-    
-    func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
-        return searchController.searchBar.text?.isEmpty ?? true
+        if #available(iOS 11.0, *) {
+            let sc = UISearchController(searchResultsController: nil)
+            sc.delegate = self
+            let scb = sc.searchBar
+            scb.tintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            scb.barTintColor = UIColor.white
+            sc.obscuresBackgroundDuringPresentation = false
+            
+            if let textfield = scb.value(forKey: "searchField") as? UITextField {
+                textfield.textColor = UIColor.blue
+                textfield.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                if let backgroundview = textfield.subviews.first {
+                    
+                    // Background color
+                    backgroundview.backgroundColor = UIColor.white
+                    
+                    // Rounded corner
+                    backgroundview.layer.cornerRadius = 10;
+                    backgroundview.clipsToBounds = true;
+                }
+            }
+            
+            if let navigationbar = self.navigationController?.navigationBar {
+                navigationbar.barTintColor = .white
+            }
+            navigationItem.searchController = sc
+            navigationItem.hidesSearchBarWhenScrolling = false
+        }
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        cafeList = cafeList.filter {
-            // lowercased : 소문자로 변환
-            return $0.name.lowercased().contains(searchText.lowercased())
-        }
+//        cafeList = cafeList.filter {
+//            // lowercased : 소문자로 변환
+//            return $0.cafeName.lowercased().contains(searchText.lowercased())
+//        }
         
         collectionView.reloadData()
     }
@@ -88,16 +101,15 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        return cafeInfoList.cafeItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "image", for: indexPath) as! MainCollectionViewCell
         
-        cell.imageView.image = imageArray[indexPath.row]
-        print(bountyInfoList[indexPath.row].name)
-        cell.titleLabel.text = bountyInfoList[indexPath.row].name
-        cell.contentlabel.text = bountyInfoList[indexPath.row].desc
+        cell.imageView.image = UIImage(named: cafeInfoList.cafeName[indexPath.row])
+        cell.titleLabel.text = cafeInfoList.cafeItems[indexPath.row].cafeName
+        cell.contentlabel.text = cafeInfoList.cafeItems[indexPath.row].cafeDesc
         
         return cell
     }
@@ -105,7 +117,10 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController : FlexibleLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {
-        return imageArray[indexPath.item].size.height
+        
+        let heightRatio = UIImage(named: cafeInfoList.cafeName[indexPath.item])!.size.height / UIImage(named: cafeInfoList.cafeName[indexPath.item])!.size.width
+        
+        return heightRatio * ((view.frame.width + 60) / 2 )
     }
     
 }
@@ -116,6 +131,10 @@ extension MainViewController: UISearchResultsUpdating {
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchController.searchBar.text!)
     }
+    
+}
+
+extension MainViewController: UISearchControllerDelegate {
     
 }
 
