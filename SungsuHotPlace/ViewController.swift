@@ -15,13 +15,5 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    print("test commit")
-    print("test commit2")
-    print("test commit3")
-
-    print("test")
-    
-    print("test commit ok")
-    
 }
 
