@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteViewController: UIViewController {
-    
+
     let cafeManager = CafeManager.shared
     var favoriteDataArr = [Favorite]()
     var cafeInfoList = CafeList()
@@ -70,9 +70,11 @@ extension FavoriteViewController: UITableViewDataSource {
         } else {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         }
-        print(cafeManager.favorites.keys[0])
-        cell.imageView?.image = UIImage(named: "\(cafeManager.favorites.keys)")
-        cell.textLabel?.text = cafeInfoList.cafeItems[indexPath.row].cafeName
+//        print(cafeManager.favorites.keys[0])
+        var title = Array(cafeManager.favorites.keys)
+        print(title[0])
+        cell.imageView?.image = UIImage(named: "\(title[indexPath.row])")
+        cell.textLabel?.text = "\(title[indexPath.row])"
         cell.detailTextLabel?.text = cafeInfoList.cafeItems[indexPath.row].cafeLocation
         
         return cell

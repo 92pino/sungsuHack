@@ -47,7 +47,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         if sender.isSelected {
             favoriteMark.isSelected = false
             favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
-            
+            cafeManager.unfavoriteCafe(title: "\(self.titleLabel.text!)")
             
         } else {
             favoriteMark.isSelected = true

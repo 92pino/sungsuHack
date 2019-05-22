@@ -13,10 +13,9 @@ private struct Standard {
 }
 class MainViewController: UIViewController {
     
-    let favoriteVC = FavoriteViewController()
     var cafeInfoList = CafeList()
     let cafeManager = CafeManager.shared
-
+    
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: FlexibleLayout())
     
     private var imageArray: [UIImage] = []
@@ -63,10 +62,10 @@ class MainViewController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String) {
-//        cafeList = cafeList.filter {
-//            // lowercased : 소문자로 변환
-//            return $0.cafeName.lowercased().contains(searchText.lowercased())
-//        }
+        //        cafeList = cafeList.filter {
+        //            // lowercased : 소문자로 변환
+        //            return $0.cafeName.lowercased().contains(searchText.lowercased())
+        //        }
         
         collectionView.reloadData()
     }
