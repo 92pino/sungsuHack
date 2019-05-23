@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		613B57A72295D1580062CD5A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613B57A62295D1580062CD5A /* MapViewController.swift */; };
+		613B57A922966B580062CD5A /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613B57A822966B580062CD5A /* GridCell.swift */; };
 		6194AA452295164B00C4760B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA442295164B00C4760B /* AppDelegate.swift */; };
 		6194AA472295164B00C4760B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA462295164B00C4760B /* MainViewController.swift */; };
 		6194AA4A2295164B00C4760B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6194AA482295164B00C4760B /* Main.storyboard */; };
@@ -22,9 +24,12 @@
 		6194AA6D22952B3E00C4760B /* favoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA6C22952B3E00C4760B /* favoriteModel.swift */; };
 		6194AA6F22952BAF00C4760B /* AppImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA6E22952BAF00C4760B /* AppImageData.swift */; };
 		6194AA712295637300C4760B /* Assets 20-00-46-941.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6194AA702295637200C4760B /* Assets 20-00-46-941.xcassets */; };
+		6194AA772295B14F00C4760B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA762295B14F00C4760B /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		613B57A62295D1580062CD5A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		613B57A822966B580062CD5A /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		6194AA412295164B00C4760B /* SungsuHotPlace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SungsuHotPlace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6194AA442295164B00C4760B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6194AA462295164B00C4760B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +47,7 @@
 		6194AA6C22952B3E00C4760B /* favoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteModel.swift; sourceTree = "<group>"; };
 		6194AA6E22952BAF00C4760B /* AppImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImageData.swift; sourceTree = "<group>"; };
 		6194AA702295637200C4760B /* Assets 20-00-46-941.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 20-00-46-941.xcassets"; sourceTree = "<group>"; };
+		6194AA762295B14F00C4760B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,7 @@
 			children = (
 				6194AA6222951DD500C4760B /* MainCollectionViewCell.swift */,
 				6194AA6822952A2E00C4760B /* FavoriteTableViewCell.swift */,
+				613B57A822966B580062CD5A /* GridCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -122,6 +129,8 @@
 				6194AA5E22951D8A00C4760B /* MainTabBarController.swift */,
 				6194AA462295164B00C4760B /* MainViewController.swift */,
 				6194AA66229526F800C4760B /* FavoriteViewController.swift */,
+				6194AA762295B14F00C4760B /* DetailViewController.swift */,
+				613B57A62295D1580062CD5A /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -197,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6194AA772295B14F00C4760B /* DetailViewController.swift in Sources */,
 				6194AA6322951DD500C4760B /* MainCollectionViewCell.swift in Sources */,
 				6194AA5D22951D3100C4760B /* CafeManager.swift in Sources */,
 				6194AA472295164B00C4760B /* MainViewController.swift in Sources */,
@@ -209,6 +219,8 @@
 				6194AA6B22952A8200C4760B /* favorite.swift in Sources */,
 				6194AA6D22952B3E00C4760B /* favoriteModel.swift in Sources */,
 				6194AA6F22952BAF00C4760B /* AppImageData.swift in Sources */,
+				613B57A72295D1580062CD5A /* MapViewController.swift in Sources */,
+				613B57A922966B580062CD5A /* GridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +373,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.92pino.SungsuHotPlace;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.92pino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -379,7 +391,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.92pino.SungsuHotPlace;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.92pino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

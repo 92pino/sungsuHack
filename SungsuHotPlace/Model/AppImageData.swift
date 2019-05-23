@@ -22,4 +22,5 @@ enum AppImageData {
     static let homeSelected = "home_active"
     static let favorite = "favorite"
     static let favoriteSelected = "favorite_active"
+    static let location = "location"
 }

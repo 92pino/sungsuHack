@@ -1,19 +1,19 @@
 //
-//  MainCollectionViewCell.swift
+//  GridCell.swift
 //  SungsuHotPlace
 //
-//  Created by JinBae Jeong on 22/05/2019.
+//  Created by JinBae Jeong on 23/05/2019.
 //  Copyright © 2019 pino. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class MainCollectionViewCell: UICollectionViewCell {
+class GridCell: UICollectionViewCell {
     let imageView = UIImageView()
     let titleLabel = UILabel()
     let contentlabel = UILabel()
     let favoriteMark = UIButton(type: .system)
-    let cafeManager = CafeManager.shared
     
     
     override init(frame: CGRect) {
@@ -30,31 +30,34 @@ class MainCollectionViewCell: UICollectionViewCell {
     private func configuer() {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 8
-        contentView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 6
         contentView.addSubview(imageView)
         
         contentView.addSubview(titleLabel)
         
-        contentlabel.numberOfLines = 0
+        //    contentlabel.numberOfLines = 0
         contentView.addSubview(contentlabel)
-        contentView.addSubview(favoriteMark)
+        contentlabel.font = contentlabel.font.withSize(12)
+        
+        
         favoriteMark.addTarget(self, action: #selector(favoriteChk(_:)), for: .touchUpInside)
-        favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
+        favoriteMark.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
+        //    favoriteMark.backgroundColor = .red
+        contentView.addSubview(favoriteMark)
+        favoriteMark.isHighlighted = false
     }
     
-    @objc func favoriteChk(_ sender: MainCollectionViewCell) {
-        if sender.isSelected {
-            favoriteMark.isSelected = false
-            favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
-            favoriteMark.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-            cafeManager.unfavoriteCafe(title: "\(self.titleLabel.text!)")
-            
+    @objc func favoriteChk(_ sender: UIButton) {
+        if !sender.isSelected {
+            sender.isSelected = true
+            sender.setBackgroundImage(UIImage(named: "favorite_active"), for: .normal)
+            //      sender.isHighlighted = false
+            sender.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         } else {
-            favoriteMark.isSelected = true
-            favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favoriteSelected), for: .selected)
-            favoriteMark.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-            cafeManager.favoriteCafe(title: "\(self.titleLabel.text!)")
+            sender.isSelected = false
+            sender.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
+            //      sender.isHighlighted = false
+            sender.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         }
     }
     
@@ -64,6 +67,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 130).isActive = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
@@ -77,9 +81,10 @@ class MainCollectionViewCell: UICollectionViewCell {
         contentlabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         favoriteMark.translatesAutoresizingMaskIntoConstraints = false
-        favoriteMark.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
+        favoriteMark.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15).isActive = true
         favoriteMark.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        favoriteMark.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        favoriteMark.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        //    favoriteMark.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        favoriteMark.widthAnchor.constraint(equalToConstant: 18).isActive = true
+        favoriteMark.heightAnchor.constraint(equalToConstant: 18).isActive = true
     }
 }

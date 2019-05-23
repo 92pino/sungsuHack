@@ -41,6 +41,20 @@ class FavoriteViewController: UIViewController {
         tableViewConfig()
         
         tableView.dataSource = self
+        tableView.rowHeight = 120
+        
+        let locationButton = UIButton(type: .custom)
+        locationButton.setImage(UIImage(named: AppImageData.home), for: .normal)
+        locationButton.frame = CGRect(x: 0.0, y: 0.0, width: 35.0, height: 35.0)
+        locationButton.addTarget(self, action:#selector(goToMap), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: locationButton)
+        
+        navigationItem.rightBarButtonItem = barButton
+    }
+    
+    // 탭바 이동 메서드
+    @objc func goToMap() {
+        tabBarController?.selectedIndex = 1
     }
     
     func tableViewConfig() {
@@ -64,18 +78,11 @@ extension FavoriteViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
-        if let reusableCell = tableView.dequeueReusableCell(withIdentifier: "cell") {
-            cell = reusableCell
-        } else {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        }
-//        print(cafeManager.favorites.keys[0])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath) as! FavoriteTableViewCell
+        cell.separatorInset = UIEdgeInsets.zero
+        
         var title = Array(cafeManager.favorites.keys)
-        print(title[0])
-        cell.imageView?.image = UIImage(named: "\(title[indexPath.row])")
-        cell.textLabel?.text = "\(title[indexPath.row])"
-        cell.detailTextLabel?.text = cafeInfoList.cafeItems[indexPath.row].cafeLocation
+        cell.setCell(title[indexPath.row], title[indexPath.row], cafeInfoList.cafeItems[indexPath.row].cafeLocation)
         
         return cell
     }
