@@ -38,9 +38,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return collecView
     }()
     
-    var cafeInfoList = CafeList()
     let cafeManager = CafeManager.shared
     let userDefaults = UserDefaults.standard
+    var annotationView = MKPinAnnotationView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,14 +68,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         addAnnotation()
     }
     
-    func userdefaultsSetup() {
-        cafeManager.favorites = userDefaults.array(forKey: "Favorites") as? [String: Bool] ?? [:]
-        print(cafeManager.favorites)
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
     }
     
     func configure() {
         uiView.backgroundColor = .white
         collectionView.backgroundColor = .white
+        annotationView.pinTintColor = .green
     }
     
     func autoLayout() {
@@ -148,17 +152,17 @@ extension MapViewController: MKMapViewDelegate, UITextFieldDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(cafeInfoList.cafeItems.count)
-        return cafeInfoList.cafeName.count
+        return cafeManager.cafeItems.count
     }
     
     //  // 2) 셀 표현은?
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as! GridCell
         
-        cell.imageView.image = UIImage(named: cafeInfoList.cafeName[indexPath.row])
-        cell.titleLabel.text = cafeInfoList.cafeName[indexPath.row]
-        cell.contentlabel.text = cafeInfoList.cafeName[indexPath.row]
+        cell.imageView.image = UIImage(named: cafeManager.cafeItems[indexPath.row].cafeName)
+        cell.titleLabel.text = cafeManager.cafeItems[indexPath.row].cafeName
+        cell.contentlabel.text = cafeManager.cafeItems[indexPath.row].cafeDesc
+        cell.checkFavorite = cafeManager.cafeItems[indexPath.row].favorite
         
         return cell
     }

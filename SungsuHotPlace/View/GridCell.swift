@@ -13,12 +13,23 @@ class GridCell: UICollectionViewCell {
     let imageView = UIImageView()
     let titleLabel = UILabel()
     let contentlabel = UILabel()
-    let favoriteMark = UIButton(type: .system)
+    let favoriteMark: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: AppImageData.favoriteSelected), for: .selected)
+        button.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
+        return button
+    }()
+    let cafeManager = CafeManager.shared
+    var checkFavorite: Bool = false {
+        didSet {
+            favoriteMark.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+            favoriteMark.isSelected = checkFavorite
+        }
+    }
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configuer()
         autolayout()
     }
@@ -45,19 +56,20 @@ class GridCell: UICollectionViewCell {
         //    favoriteMark.backgroundColor = .red
         contentView.addSubview(favoriteMark)
         favoriteMark.isHighlighted = false
+        
     }
     
+    
     @objc func favoriteChk(_ sender: UIButton) {
-        if !sender.isSelected {
-            sender.isSelected = true
-            sender.setBackgroundImage(UIImage(named: "favorite_active"), for: .normal)
-            //      sender.isHighlighted = false
-            sender.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+        if sender.isSelected {
+            favoriteMark.isSelected = false
+            cafeManager.unfavoriteCafe(title: "\(self.titleLabel.text!)")
+         
+            
         } else {
-            sender.isSelected = false
-            sender.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
-            //      sender.isHighlighted = false
-            sender.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+            favoriteMark.isSelected = true
+            cafeManager.favoriteCafe(title: "\(self.titleLabel.text!)")
+     
         }
     }
     

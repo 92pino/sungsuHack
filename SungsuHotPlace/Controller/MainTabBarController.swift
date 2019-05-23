@@ -18,6 +18,10 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         self.tabBar.barTintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.1)
         
+        tabBar.tintColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
+        tabBar.unselectedItemTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        tabBar.barTintColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        
         // 탭바 위에 뷰컨트롤러 올리기
         
         homeVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: AppImageData.home), selectedImage: UIImage(named: AppImageData.homeSelected))

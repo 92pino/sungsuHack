@@ -12,7 +12,6 @@ class FavoriteViewController: UIViewController {
 
     let cafeManager = CafeManager.shared
     var favoriteDataArr = [Favorite]()
-    var cafeInfoList = CafeList()
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -23,14 +22,11 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "나의 즐겨찾기"
-        print(2222)
         configure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        print(cafeManager.favorites.keys)
         
         tableView.reloadData()
     }
@@ -74,15 +70,18 @@ class FavoriteViewController: UIViewController {
 
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cafeManager.favorites.keys.count
+        let fav = cafeManager.cafeItems.filter { $0.favorite == true }
+        
+        return fav.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath) as! FavoriteTableViewCell
         cell.separatorInset = UIEdgeInsets.zero
         
-        var title = Array(cafeManager.favorites.keys)
-        cell.setCell(title[indexPath.row], title[indexPath.row], cafeInfoList.cafeItems[indexPath.row].cafeLocation)
+        let fav = cafeManager.cafeItems.filter { $0.favorite == true }
+    
+        cell.setCell(fav[indexPath.row].cafeName, fav[indexPath.row].cafeDesc, fav[indexPath.row].cafeLocation)
         
         return cell
     }
