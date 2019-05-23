@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class GridCell: UICollectionViewCell {
     let imageView = UIImageView()
