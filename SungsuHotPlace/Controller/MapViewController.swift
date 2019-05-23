@@ -9,6 +9,10 @@
 import UIKit
 import MapKit
 
+final class cafeInfo: MKPointAnnotation {
+    var url: String!
+}
+
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let mapView: MKMapView = {
@@ -41,10 +45,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let cafeManager = CafeManager.shared
     let userDefaults = UserDefaults.standard
     var annotationView = MKPinAnnotationView()
+    let annotation = cafeInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        collectionView.delegate = self
         textField.delegate = self
         collectionView.dataSource = self as? UICollectionViewDataSource
         view.addSubview(mapView)
@@ -128,23 +134,50 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func addAnnotation() {
-        let onion = MKPointAnnotation()
-        onion.title = "어니언"
-        onion.subtitle = "성동구 아차산로9길 8"
-        onion.coordinate = CLLocationCoordinate2DMake(37.544786, 127.058119)
-        mapView.addAnnotation(onion)
         
-        let daerim = MKPointAnnotation()
-        daerim.title = "대림창고"
-        daerim.subtitle = "성동구 성수이로 78"
-        daerim.coordinate = CLLocationCoordinate2DMake(37.5419534, 127.0562899)
-        mapView.addAnnotation(daerim)
+        for location in cafeManager.cafeItems {
+            let annotation = cafeInfo()
+            print(annotation)
+            annotation.title = location.cafeName
+            annotation.subtitle = location.cafeDesc
+            annotation.coordinate = location.cafeGeo
+            
+
+            mapView.addAnnotation(annotation)
+        }
     }
     
 }
 
 
 extension MapViewController: MKMapViewDelegate, UITextFieldDelegate, UICollectionViewDataSource {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? cafeInfo else { return nil }
+        
+        var annotationView: MKAnnotationView
+        if let reusableView = mapView.dequeueReusableAnnotationView(withIdentifier: "CafeID") {
+            reusableView.annotation = annotation
+            annotationView = reusableView
+        } else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "CafeID")
+            annotationView.image = UIImage(named: "map")
+            annotationView.canShowCallout = true
+            
+            let infoButton = UIButton(type: .infoDark)
+            infoButton.tag = 1
+            annotationView.rightCalloutAccessoryView = infoButton
+        }
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let cafe = view.annotation as? cafeInfo else { return }
+        
+        if control.tag == 1 {
+            // callout 클릭시 detailVC present 영역
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -168,11 +201,9 @@ extension MapViewController: MKMapViewDelegate, UITextFieldDelegate, UICollectio
     }
     
     
-    
-    // 3) 셀이 클릭되었을때?
-    //  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    ////    performSegue(withIdentifier: "showDetail", sender: indexPath.item)
-    //  }
+//      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print(indexPath)
+//      }
     
     // Cell Size?
     //  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -185,32 +216,15 @@ extension MapViewController: MKMapViewDelegate, UITextFieldDelegate, UICollectio
     
 }
 
-
-//class GridCell: UICollectionViewCell {
-//
-//  let imageView: UIImageView = {
-//    let imgView = UIImageView()
-//    imgView.translatesAutoresizingMaskIntoConstraints = false
-//    return imgView
-//  }()
-//
-//  let titleLabel: UILabel = {
-//    let titleLabel = UILabel()
-//    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//    return titleLabel
-//  }()
-//
-//  let contentlabel: UILabel = {
-//    let contentlabel = UILabel()
-//    contentlabel.translatesAutoresizingMaskIntoConstraints = false
-//    return contentlabel
-//  }()
-//
-//
-//
-//  func updateUI(_ cafeInfo: ) {
-//    imgView.image = bountyInfo.image
-//    nameLabel.text = bountyInfo.name
-//    bountyLabel.text = "\(bountyInfo.bounty)"
-//  }
-
+extension MapViewController: UICollectionViewDelegate {
+    // 3) 셀이 클릭되었을때?
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        mapView.selectAnnotation(annotation, animated: true)
+        mapView.setCenter(cafeManager.cafeItems[indexPath.item].cafeGeo, animated: true)
+        print(indexPath.item)
+    }
+    
+    @objc func openCallOut() {
+        
+    }
+}

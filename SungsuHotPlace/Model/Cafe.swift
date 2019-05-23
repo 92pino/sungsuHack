@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 
 protocol CafeItem {
+    var varName: String { get }
     var cafeName: String { get }
     var cafeDesc: String { get }
     var cafeLocation: String  { get }
@@ -19,6 +20,7 @@ protocol CafeItem {
 }
 
 class Cafe: CafeItem {
+    var varName: String
     var cafeName: String
     var cafeDesc: String
     var cafeLocation: String
@@ -26,7 +28,8 @@ class Cafe: CafeItem {
     var images: [String]
     var favorite: Bool
     
-    init(cafeName: String, cafeDesc: String, cafeLocation: String, cafeGeo: CLLocationCoordinate2D, images: [String], favorite: Bool) {
+    init(varName: String, cafeName: String, cafeDesc: String, cafeLocation: String, cafeGeo: CLLocationCoordinate2D, images: [String], favorite: Bool) {
+        self.varName = varName
         self.cafeName = cafeName
         self.cafeDesc = cafeDesc
         self.cafeLocation = cafeLocation
