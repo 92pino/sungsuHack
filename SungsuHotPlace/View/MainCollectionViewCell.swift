@@ -8,12 +8,30 @@
 
 import UIKit
 
+protocol MainCollectionViewCellDelegate {
+    func test()
+}
+
 class MainCollectionViewCell: UICollectionViewCell {
     let imageView = UIImageView()
     let titleLabel = UILabel()
     let contentlabel = UILabel()
-    let favoriteMark = UIButton(type: .system)
+    var favoriteMark: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: AppImageData.favoriteSelected), for: .selected)
+        button.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
+        return button
+        }()
     let cafeManager = CafeManager.shared
+    var checkFavorite: Bool = false {
+        didSet {
+            
+            favoriteMark.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+            favoriteMark.isSelected = checkFavorite
+        }
+    }
+    
+    var delegate: MainCollectionViewCellDelegate?
     
     
     override init(frame: CGRect) {
@@ -21,6 +39,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         
         configuer()
         autolayout()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,15 +65,14 @@ class MainCollectionViewCell: UICollectionViewCell {
     @objc func favoriteChk(_ sender: MainCollectionViewCell) {
         if sender.isSelected {
             favoriteMark.isSelected = false
-            favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
+//            favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
             favoriteMark.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-            cafeManager.unfavoriteCafe(title: "\(self.titleLabel.text!)")
-            
+            cafeManager.unfavoriteCafe(title: self.titleLabel.text!)
         } else {
             favoriteMark.isSelected = true
-            favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favoriteSelected), for: .selected)
+//            favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favoriteSelected), for: .selected)
             favoriteMark.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-            cafeManager.favoriteCafe(title: "\(self.titleLabel.text!)")
+            cafeManager.favoriteCafe(title: self.titleLabel.text!)
         }
     }
     
