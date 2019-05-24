@@ -21,6 +21,7 @@ class FavoriteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
         title = "나의 즐겨찾기"
         configure()
     }
@@ -81,8 +82,24 @@ extension FavoriteViewController: UITableViewDataSource {
         
         let fav = cafeManager.cafeItems.filter { $0.favorite == true }
     
-        cell.setCell(fav[indexPath.row].cafeName, fav[indexPath.row].cafeDesc, fav[indexPath.row].cafeLocation)
+        cell.setCell(fav[indexPath.row].cafeName, fav[indexPath.row].cafeName, fav[indexPath.row].cafeLocation)
         
         return cell
     }
+}
+
+extension FavoriteViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let fav = cafeManager.cafeItems.filter { $0.favorite == true }
+        
+        let detailVC = DetailViewController()
+        detailVC.cafeName = fav[indexPath.row].cafeName
+        detailVC.checkFavorite = fav[indexPath.row].favorite
+        present(detailVC, animated: true)
+    }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        remove
+//    }
 }

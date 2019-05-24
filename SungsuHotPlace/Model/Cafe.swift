@@ -10,26 +10,25 @@ import UIKit
 import MapKit
 
 protocol CafeItem {
-    var varName: String { get }
     var cafeName: String { get }
     var cafeDesc: String { get }
     var cafeLocation: String  { get }
     var cafeGeo: CLLocationCoordinate2D { get }
     var images: [String] { get }
     var favorite: Bool { get set }
+    var annotation: MKAnnotation? {get set}
 }
 
 class Cafe: CafeItem {
-    var varName: String
     var cafeName: String
     var cafeDesc: String
     var cafeLocation: String
     var cafeGeo: CLLocationCoordinate2D
     var images: [String]
     var favorite: Bool
+    var annotation: MKAnnotation?
     
-    init(varName: String, cafeName: String, cafeDesc: String, cafeLocation: String, cafeGeo: CLLocationCoordinate2D, images: [String], favorite: Bool) {
-        self.varName = varName
+    init(cafeName: String, cafeDesc: String, cafeLocation: String, cafeGeo: CLLocationCoordinate2D, images: [String], favorite: Bool, annotation: MKAnnotation? = nil ) {
         self.cafeName = cafeName
         self.cafeDesc = cafeDesc
         self.cafeLocation = cafeLocation

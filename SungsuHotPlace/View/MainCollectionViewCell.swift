@@ -60,6 +60,10 @@ class MainCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(favoriteMark)
         favoriteMark.addTarget(self, action: #selector(favoriteChk(_:)), for: .touchUpInside)
         favoriteMark.setBackgroundImage(UIImage(named: AppImageData.favorite), for: .normal)
+        
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        contentlabel.font = UIFont.systemFont(ofSize: 12)
+        contentlabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
     }
     
     @objc func favoriteChk(_ sender: MainCollectionViewCell) {
@@ -97,7 +101,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         favoriteMark.translatesAutoresizingMaskIntoConstraints = false
         favoriteMark.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
         favoriteMark.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        favoriteMark.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        favoriteMark.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoriteMark.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        favoriteMark.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
 }

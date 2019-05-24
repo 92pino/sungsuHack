@@ -49,7 +49,9 @@ class GridCell: UICollectionViewCell {
         
         //    contentlabel.numberOfLines = 0
         contentView.addSubview(contentlabel)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         contentlabel.font = contentlabel.font.withSize(12)
+        contentlabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         
         
         favoriteMark.addTarget(self, action: #selector(favoriteChk(_:)), for: .touchUpInside)
