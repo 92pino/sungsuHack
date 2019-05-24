@@ -30,12 +30,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "성수핫플"
         
         searchMethod()
 //        makeImage()
         configure()
         autoLayout()
+        let imageView = UIImageView(image: UIImage(named: "sungsoohp"))
+        imageView.contentMode = .scaleAspectFit
+        navigationItem.titleView = imageView
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +122,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func reloadData() {
-        filterData = cafeManager.cafeItems.shuffled()
+//        filterData = cafeManager.cafeItems.shuffled()
 //        data.reverse()
         // reverse를 몰랐을 경우 for문 이용
         
@@ -166,9 +169,13 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
-//        present(detailVC, animated: true)
+        let detailVC = DetailViewController()
+        detailVC.cafeName = cafeManager.cafeItems[indexPath.item].cafeName
+        detailVC.checkFavorite = cafeManager.cafeItems[indexPath.row].favorite
+        present(detailVC, animated: true)
     }
 }
+
 
 extension MainViewController : FlexibleLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {

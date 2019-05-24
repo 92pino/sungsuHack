@@ -25,6 +25,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.borderStyle = UITextField.BorderStyle.roundedRect
+        tf.placeholder = "Search"
+        
         return tf
     }()
     
@@ -176,8 +178,21 @@ extension MapViewController: MKMapViewDelegate, UITextFieldDelegate, UICollectio
         
         if control.tag == 1 {
             // callout 클릭시 detailVC present 영역
+            let detailVC = DetailViewController()
+            detailVC.cafeName = cafe.title!
+            
+            let content = cafeManager.cafeItems.filter { $0.cafeName == cafe.title! }
+            detailVC.checkFavorite = content.first!.favorite
+            
+            
+//            detailVC.checkFavorite = cafeManager.cafeItems[indexPath.row].favorite
+            present(detailVC, animated: true)
         }
     }
+    
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        <#code#>
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -221,6 +236,7 @@ extension MapViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         mapView.selectAnnotation(annotation, animated: true)
         mapView.setCenter(cafeManager.cafeItems[indexPath.item].cafeGeo, animated: true)
+//        cafeManager.cafeItems[indexPath.row].c
         print(indexPath.item)
     }
     
