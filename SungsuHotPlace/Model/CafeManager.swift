@@ -39,25 +39,11 @@ final class CafeManager {
         Cafe(cafeName: "블루보틀", cafeDesc: "블루보틀커피 성수 한국1호점", cafeLocation: "성동구 아차산로 7", cafeGeo: .init(latitude: 37.5472123, longitude: 127.05498209999996), images: ["블루보틀01", "블루보틀02", "블루보틀03", "블루보틀04", "블루보틀05", "블루보틀06", "블루보틀07", "블루보틀08", "블루보틀09", "블루보틀10"], favorite: false),
     ]
     
-    
-    //    let cafeName: [String]
-    
-    //    var favorites: [ String : Bool ] = [:]
-    
     init() {
-        //        let cafeList = CafeList()
-        //        self.cafeName = cafeList.cafeName
+        
     }
     
     func favoriteCafe(title: String) {
-        
-//        for x in cafeItems {
-//            var temp = x
-//            if temp.cafeName == title {
-//
-//                temp.favorite = true
-//            }
-//        }
         
         for x in 0...cafeItems.count-1{
             if cafeItems[x].cafeName == title {
