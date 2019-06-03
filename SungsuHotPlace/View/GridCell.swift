@@ -98,7 +98,6 @@ class GridCell: UICollectionViewCell {
         favoriteMark.translatesAutoresizingMaskIntoConstraints = false
         favoriteMark.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15).isActive = true
         favoriteMark.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        //    favoriteMark.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         favoriteMark.widthAnchor.constraint(equalToConstant: 18).isActive = true
         favoriteMark.heightAnchor.constraint(equalToConstant: 18).isActive = true
     }

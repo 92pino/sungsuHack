@@ -32,7 +32,6 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         
         searchMethod()
-//        makeImage()
         configure()
         autoLayout()
         let imageView = UIImageView(image: UIImage(named: "sungsoohp"))
@@ -92,14 +91,6 @@ class MainViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    
-//    private func makeImage() {
-//        for i in 1...6 {
-//            let image = UIImage(named: "0\(i)")
-//            imageArray.append(image!)
-//        }
-//    }
-    
     func configure() {
         if let layout = collectionView.collectionViewLayout as? FlexibleLayout {
             layout.delegate = self
@@ -111,19 +102,9 @@ class MainViewController: UIViewController {
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "image")
         view.addSubview(collectionView)
         
-        // pull to Refresh
-//        let refreshControl = UIRefreshControl()
-//        collectionView.alwaysBounceVertical = true
-//        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
-        // refreshControl 색상 변경
-//        refreshControl.tintColor = .blue
-//        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
-//        collectionView.refreshControl = refreshControl
     }
     
     @objc func reloadData() {
-//        filterData = cafeManager.cafeItems.shuffled()
-//        data.reverse()
         // reverse를 몰랐을 경우 for문 이용
         
         // reload가 끝났을 경우

@@ -26,9 +26,12 @@
 		6194AA6D22952B3E00C4760B /* favoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA6C22952B3E00C4760B /* favoriteModel.swift */; };
 		6194AA6F22952BAF00C4760B /* AppImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA6E22952BAF00C4760B /* AppImageData.swift */; };
 		6194AA772295B14F00C4760B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6194AA762295B14F00C4760B /* DetailViewController.swift */; };
+		6292F38E5326C3BE5AE67B39 /* Pods_SungsuHotPlace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABADF73D14B8663930E5CD0 /* Pods_SungsuHotPlace.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C8127C053B75A6E2A07D9B2 /* Pods-SungsuHotPlace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SungsuHotPlace.debug.xcconfig"; path = "Target Support Files/Pods-SungsuHotPlace/Pods-SungsuHotPlace.debug.xcconfig"; sourceTree = "<group>"; };
+		55C42382818498B2AC095CB5 /* Pods-SungsuHotPlace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SungsuHotPlace.release.xcconfig"; path = "Target Support Files/Pods-SungsuHotPlace/Pods-SungsuHotPlace.release.xcconfig"; sourceTree = "<group>"; };
 		613B57A62295D1580062CD5A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		613B57A822966B580062CD5A /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		613B57C822977A7D0062CD5A /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		6194AA6C22952B3E00C4760B /* favoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteModel.swift; sourceTree = "<group>"; };
 		6194AA6E22952BAF00C4760B /* AppImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImageData.swift; sourceTree = "<group>"; };
 		6194AA762295B14F00C4760B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9ABADF73D14B8663930E5CD0 /* Pods_SungsuHotPlace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SungsuHotPlace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6292F38E5326C3BE5AE67B39 /* Pods_SungsuHotPlace.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +73,8 @@
 			children = (
 				6194AA432295164B00C4760B /* SungsuHotPlace */,
 				6194AA422295164B00C4760B /* Products */,
+				B90B2408CB15868EC8E37B9B /* Pods */,
+				F17EFD067DAD19CFD1CC7E39 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +145,24 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		B90B2408CB15868EC8E37B9B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C8127C053B75A6E2A07D9B2 /* Pods-SungsuHotPlace.debug.xcconfig */,
+				55C42382818498B2AC095CB5 /* Pods-SungsuHotPlace.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F17EFD067DAD19CFD1CC7E39 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9ABADF73D14B8663930E5CD0 /* Pods_SungsuHotPlace.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6194AA532295164D00C4760B /* Build configuration list for PBXNativeTarget "SungsuHotPlace" */;
 			buildPhases = (
+				2C04DF9D2A5AFAC6AE904A20 /* [CP] Check Pods Manifest.lock */,
 				6194AA3D2295164B00C4760B /* Sources */,
 				6194AA3E2295164B00C4760B /* Frameworks */,
 				6194AA3F2295164B00C4760B /* Resources */,
+				FA681434EBCD557F1B1FB645 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,6 +230,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2C04DF9D2A5AFAC6AE904A20 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SungsuHotPlace-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA681434EBCD557F1B1FB645 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SungsuHotPlace/Pods-SungsuHotPlace-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SungsuHotPlace/Pods-SungsuHotPlace-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SungsuHotPlace/Pods-SungsuHotPlace-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6194AA3D2295164B00C4760B /* Sources */ = {
@@ -368,6 +437,7 @@
 		};
 		6194AA542295164D00C4760B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C8127C053B75A6E2A07D9B2 /* Pods-SungsuHotPlace.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -386,6 +456,7 @@
 		};
 		6194AA552295164D00C4760B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55C42382818498B2AC095CB5 /* Pods-SungsuHotPlace.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
